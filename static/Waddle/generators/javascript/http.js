@@ -23,16 +23,16 @@ Blockly.JavaScript["http_get"] = function (block) {
     return code;
 };
 
-Blockly.JavaScript['axios_response'] = function () {
+Blockly.JavaScript['http_response'] = function () {
     return ['response', Blockly.JavaScript.ORDER_NONE];
 };
 
-Blockly.JavaScript['axios_responsedropdown'] = function (block) {
+Blockly.JavaScript['http_responsedropdown'] = function (block) {
     var dropdown_mode = block.getFieldValue('MODE');
         var code = `response.${dropdown_mode}`;
     return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
-Blockly.JavaScript['axios_error'] = function () {
+Blockly.JavaScript['http_error'] = function () {
     return ['e', Blockly.JavaScript.ORDER_NONE];
 };
