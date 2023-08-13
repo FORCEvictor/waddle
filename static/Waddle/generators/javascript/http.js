@@ -8,7 +8,7 @@ Blockly.JavaScript["http_get"] = function (block) {
     var ok = Blockly.JavaScript.statementToCode(block, 'OK');
     var error = Blockly.JavaScript.statementToCode(block, 'ERROR');
     var url = Blockly.JavaScript.valueToCode(block, 'URL', Blockly.JavaScript.ORDER_ATOMIC) || "''";
-    var code = `https.${mode}(${url},{},{},
+    var code = `http.${mode}(${url},{},{},
    (response) => {
         if (response.data) {
           try {
