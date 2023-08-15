@@ -15,7 +15,7 @@ Blockly.Blocks["crypto_md5"] = {
   init: function () {
     this.appendValueInput("STR")
       .setCheck(null)
-      .appendField("使用Crypto生成哈希MD5");
+      .appendField("使用Crypto生成哈希MD5(有风险)");
     this.appendDummyInput("").appendField("的对象");
     this.setOutput(true, null);
     this.setColour(BlockColors["crypto"]);
@@ -131,7 +131,7 @@ Blockly.Blocks["crypto_des_encrypt"] = {
   init: function () {
     this.appendValueInput("TEXT")
       .setCheck(null)
-      .appendField("使用Crypto DES加密");
+      .appendField("使用Crypto DES加密(有风险)");
     this.appendValueInput("CODE").setCheck(null).appendField("密钥");
     this.setInputsInline(true);
     this.setOutput(true, "String");
@@ -145,7 +145,7 @@ Blockly.Blocks["crypto_des_decrypt"] = {
   init: function () {
     this.appendValueInput("TEXT")
       .setCheck(null)
-      .appendField("使用Crypto DES解密");
+      .appendField("使用Crypto DES解密(有风险)");
     this.appendValueInput("CODE").setCheck(null).appendField("密钥");
     this.setInputsInline(true);
     this.setOutput(true, "String");
