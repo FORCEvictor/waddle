@@ -8,7 +8,7 @@ Blockly.JavaScript["http_get"] = function (block) {
     var ok = Blockly.JavaScript.statementToCode(block, 'OK');
     var error = Blockly.JavaScript.statementToCode(block, 'ERROR');
     var url = Blockly.JavaScript.valueToCode(block, 'URL', Blockly.JavaScript.ORDER_ATOMIC) || "''";
-    var code = `https.${mode}(${url},{},{},
+    var code = `http.${mode}(${url},{},{},
    (response) => {
         if (response.data) {
           try {
@@ -23,16 +23,16 @@ Blockly.JavaScript["http_get"] = function (block) {
     return code;
 };
 
-Blockly.JavaScript['axios_response'] = function () {
+Blockly.JavaScript['http_response'] = function () {
     return ['response', Blockly.JavaScript.ORDER_NONE];
 };
 
-Blockly.JavaScript['axios_responsedropdown'] = function (block) {
+Blockly.JavaScript['http_responsedropdown'] = function (block) {
     var dropdown_mode = block.getFieldValue('MODE');
         var code = `response.${dropdown_mode}`;
     return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
-Blockly.JavaScript['axios_error'] = function () {
+Blockly.JavaScript['http_error'] = function () {
     return ['e', Blockly.JavaScript.ORDER_NONE];
 };

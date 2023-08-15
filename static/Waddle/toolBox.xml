@@ -442,7 +442,7 @@ TIP
 		</button>
 		<block type="http_import">
 		</block>
-		<block type="http_getpost">
+		<block type="http_get">
 		</block>
 		<block type="http_response">
 		</block>
