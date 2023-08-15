@@ -8,7 +8,7 @@ Blockly.JavaScript["crypto_md5"] = function (block) {
     "STR",
     Blockly.JavaScript.ORDER_ATOMIC
   );
-  var code = `CryptoJS.MD5(${value_str})`;
+  var code = `CryptoJS.MD5(${value_str}).toString()`;
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
@@ -18,7 +18,7 @@ Blockly.JavaScript["crypto_sha1"] = function (block) {
     "STR",
     Blockly.JavaScript.ORDER_ATOMIC
   );
-  var code = `CryptoJS.SHA1(${value_str})`;
+  var code = `CryptoJS.SHA1(${value_str}).toString()`;
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
@@ -82,7 +82,7 @@ Blockly.JavaScript["crypto_aes_encrypt"] = function (block) {
     "CODE",
     Blockly.JavaScript.ORDER_ATOMIC
   );
-  var code = `CryptoJS.AES.encrypt(${value_text}, ${value_code})`;
+  var code = `CryptoJS.AES.encrypt(${value_text}, ${value_code}).toString()`;
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
 Blockly.JavaScript["crypto_aes_decrypt"] = function (block) {
@@ -96,7 +96,7 @@ Blockly.JavaScript["crypto_aes_decrypt"] = function (block) {
     "CODE",
     Blockly.JavaScript.ORDER_ATOMIC
   );
-  var code = `CryptoJS.AES.decrypt(${value_text}, ${value_code})`;
+  var code = `CryptoJS.AES.decrypt(${value_text}, ${value_code}).toString(CryptoJS.enc.Utf8)`;
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
@@ -111,7 +111,7 @@ Blockly.JavaScript["crypto_des_encrypt"] = function (block) {
     "CODE",
     Blockly.JavaScript.ORDER_ATOMIC
   );
-  var code = `CryptoJS.DES.encrypt(${value_text}, ${value_code})`;
+  var code = `CryptoJS.DES.encrypt(${value_text}, ${value_code}).toString()`;
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
 Blockly.JavaScript["crypto_des_decrypt"] = function (block) {
@@ -125,7 +125,7 @@ Blockly.JavaScript["crypto_des_decrypt"] = function (block) {
     "CODE",
     Blockly.JavaScript.ORDER_ATOMIC
   );
-  var code = `CryptoJS.DES.decrypt(${value_text}, ${value_code})`;
+  var code = `CryptoJS.DES.decrypt(${value_text}, ${value_code}).toString(CryptoJS.enc.Utf8)`;
   return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
