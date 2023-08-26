@@ -1,7 +1,7 @@
 
 <p align="center">
     <br>
-    <img width="100" src="https://waddle.coco-central.cn/static/img/logo/logo-purple.png" alt="Waddle-logo-white"/>
+    <img width="100" src="https://gitee.com/coco-central/waddle/raw/master/static/img/logo/logo-white.png" alt="Waddle-logo-white"/>
 </p>
 
 <h1 align="center">
