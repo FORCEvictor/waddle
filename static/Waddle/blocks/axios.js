@@ -1,207 +1,95 @@
-//ooooooooo@^ ... @OooO\.]]/@oo@@@@@oO@ ... @@^****
-//oooooooOOO^ ... @OooO@@@OoooooOOOooO^ ...=@@^****
-//ooooooOOoO@  .. @@Oooooo@OoO@OoooOOO^ ...@O@\****
-//OOOOOOOOOO@` .. @OOOOoooOoooO@@@Ooo@^.../@OO@***,
-//OOOOOOOOOOO\ .. @OoooooooooooooO@OO@^..=@OOO@*,O[
-//OOOOOOOOOOO@`.. @OOO@@@@@@@@@@@@@@O@^..@OOOO@**,]
-//@@@@@OOOOOOO\ ,//`               .[\@`/@OOO@@^,[*
-//@@@@@@@@@OOO@/.                      .\@O@Oo@^O@o
-//@@@@@@OOOO@/ =@@`                    .. =@OO@^***
-//@@OOOOOOO@`  ,[[      =^            =@@^ .@O@\*,]
-//@O@OOOOO@` ......    ,/  =\  .@           .@O\[,*
-//@O@OOOO@^          [[.[O/[,@@@`    ....... =@,[[*
-//@O@O\OO@^                                  =@O@@o
-//@@@@@@@@`                                  =@@@@o
-//O@OO,\`O^                                  @O*`/\
-//\O@/[`/@@^        /@]]                    /O=O/OO
-//****`=OO@@@`..../@o/ooO@.           ....,@/,,[[[*
-//],`****,`\`\@@@@O/o\ooO@............,]@@/]`]]]]]]
-//OO@O\*^*`**]O\./@oO@Oo@@]]]]/O@@@@@@OOOOOOOOOOOOO
-//OOO\/*,]]ooOO@OOOO@@@@/........    =@[[[[[`******
-//,]oOOOO@@@@O/\@@OOO@@`           @[\@O@\******`**
-//@@/[[`******=@Oo@O@@^            @@O@@@@O@@[O//\@
-//*****]=O,O^*O@O@@@O@            .@@@@@OO@@@@\@O`/
-//*****\o^[***,O@@@/[@@@@@@@@@@@@@@[[@@@O@@@/,`,*[`
-//**************]/OOO@^  =@OO@` ./@OOOOO@/*********
-//                 于勤保佑 无bug
-
-//使用的是axios图标中的颜色
-
-Blockly.Blocks["axios_import"] = {
-  init: function () {
-    this.appendDummyInput().appendField("引入axios");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(BlockColors["axios"]);
-    this.setTooltip("");
-    this.setHelpUrl("");
-  },
+Blockly.JavaScript['axios_import'] = function () {
+  var code = `const axios = require('axios');\n`;
+  return code;
 };
 
-Blockly.Blocks["axios_getpost_simple"] = {
-  init: function () {
-    this.appendValueInput("URL")
-      .setCheck("String")
-      .appendField("使用axios")
-      .appendField(
-        new Blockly.FieldDropdown([
-          ["get", "get"],
-          ["post", "post"],
-          ["put", "put"],
-          ["delete", "delete"],
-        ]),
-        "MODE"
-      )
-      .appendField("链接");
-    this.appendStatementInput("OK").setCheck(null).appendField("当请求完成时");
-    this.appendStatementInput("ERROR")
-      .setCheck(null)
-      .appendField("当请求失败时");
-    this.setInputsInline(true);
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(BlockColors["axios"]);
-    this.setTooltip("");
-    this.setHelpUrl("");
-  },
+//简单请求
+Blockly.JavaScript['axios_getpost_simple'] = function (block) {
+  var mode = block.getFieldValue('MODE');
+  var ok = Blockly.JavaScript.statementToCode(block, 'OK');
+  var error = Blockly.JavaScript.statementToCode(block, 'ERROR');
+  var url = Blockly.JavaScript.valueToCode(block, 'URL', Blockly.JavaScript.ORDER_ATOMIC) || "''";
+  var code = `axios.${mode}(${url})
+.then((response) => {
+${ok}
+})
+.catch((error) => {
+${error}
+});
+`;
+  return code;
 };
 
-Blockly.Blocks["axios_response"] = {
-  init: function () {
-    this.appendDummyInput().appendField("响应内容");
-    this.setOutput(true, null);
-    this.setColour(BlockColors["axios"]);
-    this.setTooltip("");
-    this.setHelpUrl("");
-  },
+Blockly.JavaScript['axios_response'] = function () {
+  return ['response', Blockly.JavaScript.ORDER_NONE];
 };
 
-Blockly.Blocks["axios_responsedropdown"] = {
-  init: function () {
-    this.appendDummyInput()
-      .appendField("响应内容的")
-      .appendField(
-        new Blockly.FieldDropdown([
-          ["信息", "data"],
-          ["响应头", "headers"],
-          ["HTTP状态码", "status"],
-          ["HTTP状态信息", "statusText"],
-        ]),
-        "MODE"
-      );
-    this.setOutput(true, null);
-    this.setColour(BlockColors["axios"]);
-    this.setTooltip("");
-    this.setHelpUrl("");
-  },
+Blockly.JavaScript['axios_responsedropdown'] = function (block) {
+  var dropdown_mode = block.getFieldValue('MODE');
+      var code = `response.${dropdown_mode}`;
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.JavaScript.ORDER_NONE];
 };
 
-Blockly.Blocks["axios_error"] = {
-  init: function () {
-    this.appendDummyInput().appendField("获取错误");
-    this.setOutput(true, null);
-    this.setColour(BlockColors["axios"]);
-    this.setTooltip("");
-    this.setHelpUrl("");
-  },
+Blockly.JavaScript['axios_error'] = function () {
+  return ['error', Blockly.JavaScript.ORDER_NONE];
 };
 
-Blockly.Blocks["axios_getpost"] = {
-  init: function () {
-    this.appendValueInput("URL")
-      .setCheck("String")
-      .appendField("使用axios")
-      .appendField(
-        new Blockly.FieldDropdown([
-          ["get", "get"],
-          ["post", "post"],
-          ["put", "put"],
-          ["delete", "delete"],
-        ]),
-        "MODE"
-      )
-      .appendField("链接");
-    this.appendStatementInput("PAR").setCheck(null).appendField("请求配置");
-    this.appendStatementInput("OK").setCheck(null).appendField("当请求完成时");
-    this.appendStatementInput("error")
-      .setCheck(null)
-      .appendField("当请求失败时");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(BlockColors["axios"]);
-    this.setTooltip("");
-    this.setHelpUrl("");
-  },
+//请求头
+Blockly.JavaScript["axios_headers"] = function(block){
+  var value_num = Blockly.JavaScript.valueToCode(block, 'NUM', Blockly.JavaScript.ORDER_ATOMIC) || '0';
+  var code = `headers: ${value_num},`;
+  return code;
+}
+
+//请求体
+Blockly.JavaScript["axios_data"] = function(block){
+  var value_num = Blockly.JavaScript.valueToCode(block, 'NUM', Blockly.JavaScript.ORDER_ATOMIC) || '0';
+  var code = `data: ${value_num},`;
+  return code;
+}
+
+//复杂请求
+Blockly.JavaScript['axios_getpost'] = function (block) {
+  var dropdown_mode = block.getFieldValue('MODE');
+  var value_url = Blockly.JavaScript.valueToCode(block, 'URL', Blockly.JavaScript.ORDER_ATOMIC) || "''";
+  var statements_axiosHEADERS = Blockly.JavaScript.statementToCode(block, 'axiosHEADERS');
+  var statements_axiosBODY = Blockly.JavaScript.statementToCode(block, 'axiosBODY');
+  var statements_ok = Blockly.JavaScript.statementToCode(block, 'OK');
+  var statements_error = Blockly.JavaScript.statementToCode(block, 'error');
+  var code = `
+var config = {
+  method: '${dropdown_mode}',
+  url: ${value_url},
+  ${statements_axiosHEADERS}
+  ${statements_axiosBODY}
+  };
+  
+axios(config)
+.then((response) => {
+  ${statements_ok}
+})
+.catch((error) => {
+  ${statements_error}
+});
+`;
+  return code;
 };
 
-Blockly.Blocks["axios_timeout"] = {
-  init: function () {
-    this.appendValueInput("NUM").setCheck("Number").appendField("超时限制");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(BlockColors["axios"]);
-    this.setTooltip("");
-    this.setHelpUrl("");
-  },
+Blockly.JavaScript['axios_timeout'] = function (block) {
+  var value_num = Blockly.JavaScript.valueToCode(block, 'NUM', Blockly.JavaScript.ORDER_ATOMIC) || '0';
+  var code = `timeout: ${value_num},\n`;
+  return code;
 };
 
-Blockly.Blocks["axios_maxcontentlength"] = {
-  init: function () {
-    this.appendValueInput("NUM")
-      .setCheck("Number")
-      .appendField("响应内容最大尺寸");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(BlockColors["axios"]);
-    this.setTooltip("");
-    this.setHelpUrl("");
-  },
+Blockly.JavaScript['axios_maxcontentlength'] = function (block) {
+  var value_num = Blockly.JavaScript.valueToCode(block, 'NUM', Blockly.JavaScript.ORDER_ATOMIC) || '0';
+  var code = `maxContentLength: ${value_num},\n`;
+  return code;
 };
 
-Blockly.Blocks["axios_maxcontentlength"] = {
-  init: function () {
-    this.appendValueInput("NUM")
-      .setCheck("Number")
-      .appendField("最大重定向次数");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(BlockColors["axios"]);
-    this.setTooltip("");
-    this.setHelpUrl("");
-  },
-};
-
-Blockly.Blocks["axios_withcredentials"] = {
-  init: function () {
-    this.appendDummyInput()
-      .appendField("跨域请求是否携带凭证")
-      .appendField(new Blockly.FieldCheckbox("TRUE"), "NAME");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(BlockColors["axios"]);
-    this.setTooltip("");
-    this.setHelpUrl("");
-  },
-};
-
-Blockly.Blocks["axios_headers"] = {
-  init: function () {
-    this.appendValueInput("NUM").setCheck("dict").appendField("自定义请求头");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(BlockColors["axios"]);
-    this.setTooltip("");
-    this.setHelpUrl("");
-  },
-};
-
-Blockly.Blocks["axios_data"] = {
-  init: function () {
-    this.appendValueInput("NUM").setCheck(null).appendField("请求数据");
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour(BlockColors["axios"]);
-    this.setTooltip("");
-    this.setHelpUrl("");
-  },
-};
+Blockly.JavaScript['axios_withcredentials'] = function(block){
+  var checkbox_name = block.getFieldValue('NAME') === 'TRUE';
+  var code = `withCredentials: ${checkbox_name},\n`;
+  return code;
+}
