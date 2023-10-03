@@ -1,7 +1,7 @@
 
 <p align="center">
     <br>
-    <img width="100" src="https://gitee.com/coco-central/waddle/raw/master/static/img/logo/logo-white.png" alt="Waddle-logo-white"/>
+    <img width="100" src="https://public.coco-central.cn/waddle/1/logo-紫.svg" alt="Waddle-logo"/>
 </p>
 
 <h1 align="center">
@@ -22,38 +22,21 @@ Waddle 是由 Coconut Studio 基于 Blockly 开发的 CoCo自定义控件 图形
 
 ### 使用
 
-直接访问
+- 稳定版：https://waddle.coco-central.cn
 
-- 稳定版：https://dev.waddle.coco-central.cn
-
-- 开发版：已下线，请使用稳定版。
-
-本地部署
-
-1. clone仓库（ https://gitee.com/coco-central/waddle ）
-
-2. 打开项目文件夹
-
-3. 在命令行运行命令 python -m http.server 8000 或双击运行 runserver.cmd
-
-4. 确认8000端口没有占用（占用了请回到第三步自定义端口）
- 
-5. 浏览器打开 http://localhost:8000 即可
-
+- 开发版：https://dev.waddle.coco-central.cn
 
 ### 反馈
 
-如果你遇到 Bug 或者有好建议，可以选择 [提交issues](https://gitee.com/coco-central/waddle/issues) ，我们会尽快处理！
+如果你遇到 Bug 或者有好建议，可以选择 [新建Issues](https://gitee.com/coco-central/waddle/issues) ，我们会尽快处理！
 
 ### 捐赠
 
 <p align="center">
   <br>
-  <img src="https://waddle.coco-central.cn/static/img/donate.png" alt="donate" height="250" width="250" />
+  <img src="https://public.coco-central.cn/other/donate.png" alt="donate" height="200" width="200" />
   <br>
-  <a href="https://www.yuque.com/hzsn/coconut/wtef3wwqkb99cto3?singleDoc# ">收入支出明细</a>
+  <a href="https://cocotais.feishu.cn/wiki/Cg5swWcPAi42pXk01sOcE0QTnxe?from=from_copylink">收入支出明细</a>
   <br>
 </p>
 <br>
-
-<div class="waddle-version-bot">v1.7.1(1324)-release</div>
